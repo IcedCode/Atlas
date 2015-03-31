@@ -7,11 +7,11 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
 @ToString
-public class Item {
+public class Item implements Condition {
 
     @Getter
     @Text
-    String item;
+    String name;
 
     @Getter
     @Attribute(required = false)
