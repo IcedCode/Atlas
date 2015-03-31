@@ -2,6 +2,7 @@ package net.avicus.atlas.xml.components;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.xml.data.ItemSlot;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
@@ -14,7 +15,7 @@ public class Item {
 
     @Getter
     @Attribute(required = false)
-    String slot = "-1";
+    ItemSlot slot;
 
     @Getter
     @Attribute(required = false)
@@ -23,5 +24,9 @@ public class Item {
     @Getter
     @Attribute(required = false)
     String enchantment;
+
+    @Getter
+    @Attribute(required = false)
+    String lore;
 
 }

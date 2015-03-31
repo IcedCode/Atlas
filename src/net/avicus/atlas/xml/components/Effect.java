@@ -2,6 +2,7 @@ package net.avicus.atlas.xml.components;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.xml.data.Duration;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
@@ -13,11 +14,11 @@ public class Effect {
     String name;
 
     @Getter
-    @Attribute
-    int amplifier;
+    @Attribute(required = false)
+    int amplifier = 1;
 
     @Getter
-    @Attribute
-    String duration;
+    @Attribute(required = false)
+    Duration duration = new Duration(-1);
 
 }

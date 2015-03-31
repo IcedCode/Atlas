@@ -1,13 +1,8 @@
 package net.avicus.atlas;
 
-import net.avicus.atlas.xml.data.Position;
-import net.avicus.atlas.xml.data.Version;
-import net.avicus.atlas.xml.data.TeamColor;
 import net.avicus.atlas.xml.Map;
-import net.avicus.atlas.xml.transformers.PositionTransform;
-import net.avicus.atlas.xml.transformers.TeamColorTransform;
-import net.avicus.atlas.xml.transformers.UUIDTransform;
-import net.avicus.atlas.xml.transformers.VersionTransform;
+import net.avicus.atlas.xml.data.*;
+import net.avicus.atlas.xml.transformers.*;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.RegistryMatcher;
@@ -25,11 +20,12 @@ public class Atlas {
         {
             rm.bind(UUID.class, UUIDTransform.class);
             rm.bind(Version.class, VersionTransform.class);
-            rm.bind(Position.class, PositionTransform.class);
-        }
 
-        {
+            rm.bind(ItemSlot.class, ItemSlotTransform.class);
+            rm.bind(Position.class, PositionTransform.class);
             rm.bind(TeamColor.class, TeamColorTransform.class);
+
+            rm.bind(Duration.class, DurationTransform.class);
         }
 
         Serializer serializer = new Persister(rm);

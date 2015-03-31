@@ -2,8 +2,6 @@ package net.avicus.atlas.xml.data;
 
 import lombok.Getter;
 import lombok.ToString;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.DyeColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +29,6 @@ public class TeamColor {
         this.textColor = textColor;
         this.dyeColor = dyeColor;
         list.add(this);
-    }
-
-    public ChatColor getBukkitTextColor() {
-        return ChatColor.valueOf(textColor);
-    }
-
-    public DyeColor getBukkitDyeColor() {
-        return DyeColor.valueOf(dyeColor);
     }
 
     public static TeamColor findByName(String name) throws Exception {

@@ -34,7 +34,7 @@ public class Map {
 
     @Getter
     @ElementList(required = false)
-    List<Condition> conditions;
+    List<ConditionSet> conditions;
 
     @Getter
     @ElementListUnion({
