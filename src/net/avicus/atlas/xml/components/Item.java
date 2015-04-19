@@ -3,6 +3,7 @@ package net.avicus.atlas.xml.components;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.xml.Map;
+import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.data.ItemSlot;
 import org.simpleframework.xml.Attribute;
@@ -33,6 +34,7 @@ public class Item implements Condition {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-
+        if (count <= 0)
+            throw new AssemblerException("Item count must be greater than 0");
     }
 }

@@ -39,12 +39,7 @@ public class Atlas {
     public static Map parse(InputStream input) throws Exception {
         Map map = getSerializer().read(Map.class, input);
         map.assemble();
-
         return map;
-    }
-
-    public static Map parse(File file) throws Exception {
-        return parse(new FileInputStream(file));
     }
 
 }

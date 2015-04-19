@@ -29,6 +29,10 @@ public class Map implements Assembler {
             condition.assemble(this);
         for (Event event : events)
             event.assemble(this);
+        for (Monument monument : monuments)
+            monument.assemble(this);
+        for (Loadout loadout : loadouts)
+            loadout.assemble(this);
         assemble(this);
     }
 
