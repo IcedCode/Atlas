@@ -1,5 +1,7 @@
 package net.avicus.atlas.xml.components;
 
-public interface Condition {
+import net.avicus.atlas.xml.assembler.Assembler;
+
+public interface Condition extends Assembler {
 
 }

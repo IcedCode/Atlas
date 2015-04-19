@@ -7,14 +7,19 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.RegistryMatcher;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Atlas {
 
-    public static void main(String[] arg) throws Exception {
-        InputStream input = ClassLoader.getSystemClassLoader().getResourceAsStream("map.xml");
+    public static void main(String[] args) {
+        System.out.println("I'm a Bukkit plugin, silly!");
+    }
 
+    public static Serializer getSerializer() {
         RegistryMatcher rm = new RegistryMatcher();
 
         {
@@ -28,10 +33,18 @@ public class Atlas {
             rm.bind(Duration.class, DurationTransform.class);
         }
 
-        Serializer serializer = new Persister(rm);
-        Map example = serializer.read(Map.class, input);
+        return new Persister(rm);
+    }
 
-        System.out.println(example);
+    public static Map parse(InputStream input) throws Exception {
+        Map map = getSerializer().read(Map.class, input);
+        map.assemble();
+
+        return map;
+    }
+
+    public static Map parse(File file) throws Exception {
+        return parse(new FileInputStream(file));
     }
 
 }

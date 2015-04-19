@@ -31,7 +31,7 @@ public class TeamColor {
         list.add(this);
     }
 
-    public static TeamColor findByName(String name) throws Exception {
+    public static TeamColor getByName(String name) throws Exception {
         for (TeamColor color : list)
             if (color.getName().equalsIgnoreCase(name))
                 return color;

@@ -2,19 +2,35 @@ package net.avicus.atlas.xml;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.xml.assembler.Assembler;
+import net.avicus.atlas.xml.assembler.AssemblerException;
+import net.avicus.atlas.xml.components.Spawn;
 import net.avicus.atlas.xml.data.Version;
-import net.avicus.atlas.xml.elements.event.*;
 import net.avicus.atlas.xml.elements.*;
+import net.avicus.atlas.xml.elements.event.Event;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.ElementListUnion;
 import org.simpleframework.xml.Root;
 
 import java.util.List;
 
 @ToString
 @Root
-public class Map {
+public class Map implements Assembler {
+
+    public void assemble() throws AssemblerException {
+        for (Author author : authors)
+            author.assemble(this);
+        for (Team team : teams)
+            team.assemble(this);
+        for (Spawn spawn : spawns)
+            spawn.assemble(this);
+        for (ConditionSet condition : conditions)
+            condition.assemble(this);
+        for (Event event : events)
+            event.assemble(this);
+        assemble(this);
+    }
 
     @Getter
     @Element
@@ -34,18 +50,15 @@ public class Map {
 
     @Getter
     @ElementList(required = false)
+    List<Spawn> spawns;
+
+    @Getter
+    @ElementList(required = false)
     List<ConditionSet> conditions;
 
     @Getter
-    @ElementListUnion({
-            @ElementList(name = "build", type = Build.class, required = false),
-            @ElementList(name = "interact", type = Interact.class, required = false),
-            @ElementList(name = "kill", type = Kill.class, required = false),
-            @ElementList(name = "damage", type = Damage.class, required = false),
-            @ElementList(name = "move", type = Move.class, required = false),
-            @ElementList(entry = "remove-drops", type = RemoveDrops.class, required = false)
-    })
-    List<Event> events;
+    @Element
+    Events events;
 
     @Getter
     @ElementList(required = false)
@@ -55,4 +68,29 @@ public class Map {
     @ElementList(required = false)
     List<Loadout> loadouts;
 
+    public Loadout getLoadoutByName(String name) {
+        for (Loadout loadout : loadouts)
+            if (loadout.getName().equalsIgnoreCase(name))
+                return loadout;
+        return null;
+    }
+
+    public Team getTeamByColor(String color) {
+        for (Team team : teams)
+            if (team.getColor().getName().equalsIgnoreCase(color))
+                return team;
+        return null;
+    }
+
+    public ConditionSet getConditionByName(String name) {
+        for (ConditionSet condition : conditions)
+            if (condition.getName().equalsIgnoreCase(name))
+                return condition;
+        return null;
+    }
+
+    @Override
+    public void assemble(Map map) throws AssemblerException {
+
+    }
 }

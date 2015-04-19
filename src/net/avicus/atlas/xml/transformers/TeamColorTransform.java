@@ -7,7 +7,7 @@ public class TeamColorTransform implements Transform<TeamColor> {
 
     @Override
     public TeamColor read(String raw) throws Exception {
-        return TeamColor.findByName(raw);
+        return TeamColor.getByName(raw);
     }
 
     @Override

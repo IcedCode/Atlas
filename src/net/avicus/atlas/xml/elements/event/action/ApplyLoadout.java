@@ -2,11 +2,15 @@ package net.avicus.atlas.xml.elements.event.action;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.xml.Map;
+import net.avicus.atlas.xml.assembler.Assembler;
+import net.avicus.atlas.xml.assembler.AssemblerException;
+import net.avicus.atlas.xml.elements.Loadout;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
-@ToString
-public class ApplyLoadout {
+@ToString(callSuper = true)
+public class ApplyLoadout extends Action {
 
     @Getter
     @Attribute
@@ -16,4 +20,13 @@ public class ApplyLoadout {
     @Text
     String name;
 
+    @Getter
+    Loadout loadout;
+
+    @Override
+    public void assemble(Map map) throws AssemblerException {
+        loadout = map.getLoadoutByName(name);
+        if (loadout == null)
+            throw new AssemblerException("Unknown loadout: \"" + name + "\"");
+    }
 }

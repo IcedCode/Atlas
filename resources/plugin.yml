@@ -1,0 +1,7 @@
+ name: Atlas
+ version: 0.0.1
+ description: A game manager plugin Avicus.
+ author: KyloCode
+ authors: [Public Contributors]
+ website: https://github.com/Avicus/Atlas
+ main: net.avicus.atlas.AtlasPlugin

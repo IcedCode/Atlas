@@ -2,6 +2,9 @@ package net.avicus.atlas.xml.elements;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.xml.Map;
+import net.avicus.atlas.xml.assembler.Assembler;
+import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.components.Condition;
 import net.avicus.atlas.xml.components.region.*;
 import org.simpleframework.xml.ElementList;
@@ -27,4 +30,9 @@ public class RegionSet implements Condition,Iterable<Region> {
         return list.iterator();
     }
 
+    @Override
+    public void assemble(Map map) throws AssemblerException {
+        for (Region region : list)
+            region.assemble(map);
+    }
 }

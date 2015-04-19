@@ -1,4 +1,4 @@
-<project>
+<project default="jar">
 
     <property name="lib" value="lib"/>
     <property name="src" value="src"/>
@@ -7,7 +7,6 @@
     <property name="main-class" value="net.avicus.atlas.Atlas"/>
     <property name="classes.dir" value="build/classes"/>
     <property name="jar.dir" value="build"/>
-
 
     <target name="clean">
         <delete dir="build"/>
