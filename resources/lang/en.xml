@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locale>
+    <msg id="boot">Atlas {0} is starting up!</msg>
+    <error id="unknown">Unknown error.</error>
+</locale>

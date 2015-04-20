@@ -1,5 +1,6 @@
 package net.avicus.atlas;
 
+import net.avicus.atlas.chat.Lang;
 import net.avicus.atlas.xml.Map;
 import net.avicus.atlas.xml.data.*;
 import net.avicus.atlas.xml.transformers.*;
@@ -15,8 +16,12 @@ import java.util.UUID;
 
 public class Atlas {
 
-    public static void main(String[] args) {
-        System.out.println("I'm a Bukkit plugin, silly!");
+    public static void main(String[] args) throws Exception {
+        System.out.println("Executing locale tests...");
+
+        Lang lang = getSerializer().read(Lang.class, ClassLoader.getSystemClassLoader().getResourceAsStream("lang/en.xml"));
+
+        System.out.println(lang.toString());
     }
 
     public static Serializer getSerializer() {
