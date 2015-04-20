@@ -1,8 +1,9 @@
 package net.avicus.atlas;
 
+import net.avicus.atlas.chat.Console;
+import net.avicus.atlas.chat.locale.Lang;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.rotation.LocalMap;
-import net.avicus.atlas.rotation.MapPacket;
 import net.avicus.atlas.rotation.Rotation;
 import net.avicus.atlas.util.yaml.Config;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +19,8 @@ public class AtlasPlugin extends JavaPlugin {
     private Config config;
 
     public void onEnable() {
+        Console.log(Lang.ATLAS_BOOT.with(getDescription().getVersion()));
+
         File configFile = new File(getDataFolder(), "config.yml");
 
         try {
@@ -46,7 +49,7 @@ public class AtlasPlugin extends JavaPlugin {
     }
 
     public void onDisable() {
-
+        Console.log(Lang.ATLAS_SHUTDOWN.with(getDescription().getVersion()));
     }
 
 }

@@ -7,10 +7,8 @@ import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.components.Spawn;
 import net.avicus.atlas.xml.data.Version;
 import net.avicus.atlas.xml.elements.*;
-import net.avicus.atlas.xml.elements.event.Event;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
+import net.avicus.atlas.xml.elements.event.*;
+import org.simpleframework.xml.*;
 
 import java.util.List;
 
@@ -61,8 +59,16 @@ public class Map implements Assembler {
     List<ConditionSet> conditions;
 
     @Getter
-    @Element
-    Events events;
+    @Path(value = "events")
+    @ElementListUnion({
+            @ElementList(name = "build", type = Build.class, inline = true),
+            @ElementList(name = "interact", type = Interact.class, inline = true),
+            @ElementList(name = "kill", type = Kill.class, inline = true),
+            @ElementList(name = "damage", type = Damage.class, inline = true),
+            @ElementList(name = "move", type = Move.class, inline = true),
+            @ElementList(entry = "remove-drops", type = RemoveDrops.class, inline = true)
+    })
+    List<Event> events;
 
     @Getter
     @ElementList(required = false)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locale>
+    <atlas>
+        <lang id="boot">Atlas version {0} is starting up.</lang>
+        <lang id="shutdown">Atlas version {0} is shutting down.</lang>
+    </atlas>
+
+    <ui>
+        <lang id="version">This server is currently running Atlas version {0}.</lang>
+        <lang id="version-update">A newer build of Atlas is available at {0}!</lang>
+        <lang id="version-latest">Atlas is up-to-date!</lang>
+    </ui>
+</locale>
