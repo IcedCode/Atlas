@@ -2,18 +2,17 @@ package net.avicus.atlas;
 
 import net.avicus.atlas.chat.locale.Lang;
 import net.avicus.atlas.chat.locale.Locale;
-import net.avicus.atlas.xml.Map;
 import net.avicus.atlas.xml.data.*;
 import net.avicus.atlas.xml.transformers.*;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.RegistryMatcher;
 
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class Atlas {
@@ -24,33 +23,33 @@ public class Atlas {
     }
 
     private static void testLocale() throws Exception {
-        System.out.println("Executing locale tests...");
+        System.out.println("Executing locale tests.");
 
-        Locale locale = Locale.getByName("en");
+        for (Map.Entry<String, Locale> e : Locale.getList().entrySet()) {
+            System.out.println(e.getKey() + ".xml");
+            List<Lang> langs = new ArrayList<Lang>();
 
-        List<Lang> langs = new ArrayList<Lang>();
+            for (Field field : Lang.class.getDeclaredFields())
+                if (Modifier.isStatic(field.getModifiers()))
+                    langs.add((Lang) field.get(null));
 
-        for (Field field : Lang.class.getDeclaredFields()) {
-            if (Modifier.isStatic(field.getModifiers())) {
-                langs.add((Lang) field.get(null));
+            int i = 0;
+            for (Lang lang : langs) {
+                try {
+                    e.getValue().translate(lang);
+                } catch (Exception ex) {
+                    System.out.println(lang.toString() + " failed!");
+                    ex.printStackTrace();
+                    i++;
+                }
             }
+
+            if (i > 0)
+                System.out.println("### " + i + " errors ###");
+            else
+                System.out.println("No errors found.");
         }
 
-        int i = 0;
-        for (Lang lang : langs) {
-            try {
-                locale.translate(lang);
-            } catch (Exception e) {
-                System.out.println(lang.toString() + " failed!");
-                e.printStackTrace();
-                i++;
-            }
-        }
-
-        if (i > 0)
-            System.out.println("### " + i + " errors ###");
-        else
-            System.out.println("No errors found.");
     }
 
     public static Serializer getSerializer() {
@@ -68,12 +67,6 @@ public class Atlas {
         }
 
         return new Persister(rm);
-    }
-
-    public static Map parse(InputStream input) throws Exception {
-        Map map = getSerializer().read(Map.class, input);
-        map.assemble();
-        return map;
     }
 
 }

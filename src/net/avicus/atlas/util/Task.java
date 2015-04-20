@@ -13,48 +13,48 @@ public abstract class Task {
         plugin = Bukkit.getPluginManager().getPlugins()[0];
     }
 
-    @Getter BukkitRunnable task;
+    @Getter BukkitRunnable runnable;
     @Getter protected boolean running;
 
     public void now() {
-        task = newTask();
-        task.runTask(plugin);
+        runnable = newRunnable();
+        runnable.runTask(plugin);
     }
 
     public void nowAsync() {
-        task = newTask();
-        task.runTaskAsynchronously(plugin);
+        runnable = newRunnable();
+        runnable.runTaskAsynchronously(plugin);
     }
 
     public void later(int delay) {
-        task = newTask();
-        task.runTaskLater(plugin, delay);
+        runnable = newRunnable();
+        runnable.runTaskLater(plugin, delay);
     }
 
     public void laterAsync(int delay) {
-        task = newTask();
-        task.runTaskLaterAsynchronously(plugin, delay);
+        runnable = newRunnable();
+        runnable.runTaskLaterAsynchronously(plugin, delay);
     }
 
     public void repeat(int delay, int ticks) {
-        task = newTask();
-        task.runTaskTimer(plugin, delay, ticks);
+        runnable = newRunnable();
+        runnable.runTaskTimer(plugin, delay, ticks);
     }
 
     public void repeatAsync(int delay, int ticks) {
-        task = newTask();
-        task.runTaskTimerAsynchronously(plugin, delay, ticks);
+        runnable = newRunnable();
+        runnable.runTaskTimerAsynchronously(plugin, delay, ticks);
     }
 
     public void cancel() {
-        if (task == null)
+        if (runnable == null)
             return;
 
-        task.cancel();
+        runnable.cancel();
         running = false;
     }
 
-    private BukkitRunnable newTask() {
+    private BukkitRunnable newRunnable() {
         return new BukkitRunnable() {
             @Override
             public void run() {

@@ -1,4 +1,4 @@
-package net.avicus.atlas.rotation;
+package net.avicus.atlas.manager;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -8,13 +8,16 @@ import net.avicus.atlas.util.Task;
 import java.util.List;
 
 @ToString
-public class Rotation {
+public class Manager {
+
+    @Getter static Manager manager;
 
     @Getter final List<Match> matches;
 
     private int index = 0;
 
-    public Rotation(List<Match> matches) {
+    public Manager(List<Match> matches) {
+        manager = this;
         this.matches = matches;
     }
 

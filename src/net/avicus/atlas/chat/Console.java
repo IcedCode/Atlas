@@ -1,14 +1,13 @@
 package net.avicus.atlas.chat;
 
-import net.avicus.atlas.chat.locale.Locale;
 import net.avicus.atlas.chat.locale.LocalizedMessage;
+import net.avicus.atlas.util.ChatUtils;
+import org.bukkit.Bukkit;
 
 public class Console {
 
-    private static Locale en = Locale.getByName("en");
-
     public static void log(LocalizedMessage string) {
-        System.out.println(string.translate(en));
+        Bukkit.getConsoleSender().sendMessage(string.translate(ChatUtils.getLocale(Bukkit.getConsoleSender())));
     }
 
 }

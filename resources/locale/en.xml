@@ -10,4 +10,10 @@
         <lang id="version-update">A newer build of Atlas is available at {0}!</lang>
         <lang id="version-latest">Atlas is up-to-date!</lang>
     </ui>
+
+    <error>
+        <lang id="invalid-arguments">Invalid arguments provided.</lang>
+        <lang id="no-permission">You don't have permission.</lang>
+        <lang id="error-occurred">An error has occurred.</lang>
+    </error>
 </locale>

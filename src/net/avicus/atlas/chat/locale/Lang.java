@@ -7,7 +7,6 @@ import org.simpleframework.xml.Root;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-@ToString
 @Root
 public class Lang extends LocalizedMessage {
 
@@ -17,6 +16,10 @@ public class Lang extends LocalizedMessage {
     public static Lang UI_VERSION = new Lang("ui", "version");
     public static Lang UI_VERSION_LATEST = new Lang("ui", "version-latest");
     public static Lang UI_VERSION_UPDATE = new Lang("ui", "version-update");
+
+    public static Lang ERROR_INVALID_ARGUMENTS = new Lang("error", "invalid-arguments");
+    public static Lang ERROR_NO_PERMISSION = new Lang("error", "no-permission");
+    public static Lang ERROR_ERROR_OCCURRED = new Lang("error", "error-occurred");
 
     @Getter final String category;
     @Getter final String id;

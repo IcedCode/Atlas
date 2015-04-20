@@ -2,8 +2,7 @@ package net.avicus.atlas.match;
 
 import lombok.Getter;
 import lombok.ToString;
-import net.avicus.atlas.Atlas;
-import net.avicus.atlas.rotation.MapPacket;
+import net.avicus.atlas.manager.MapPacket;
 import net.avicus.atlas.xml.Map;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -33,7 +32,7 @@ public class Match {
     }
 
     public void load() throws Exception {
-        this.map = Atlas.parse(packet.getConfig());
+        this.map = Map.parse(packet.getConfig());
         packet.move(folder);
     }
 

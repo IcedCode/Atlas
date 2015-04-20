@@ -1,4 +1,4 @@
-package net.avicus.atlas.rotation;
+package net.avicus.atlas.manager;
 
 import org.apache.commons.io.FileUtils;
 

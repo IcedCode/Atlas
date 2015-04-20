@@ -23,8 +23,13 @@ public class Locale {
         }
     }
 
+    public static Locale getDefault() {
+        return getByName("en");
+    }
+
     public static Locale getByName(String name) {
-        return list.get(name);
+        Locale locale = list.get(name.substring(0, 2));
+        return locale == null ? Locale.getDefault() : locale;
     }
 
     public static Locale initialize(String name) throws Exception {
@@ -46,5 +51,9 @@ public class Locale {
     @Root
     @ElementMap(key = "id", attribute = true)
     private Map<String,String> ui;
+
+    @Root
+    @ElementMap(key = "id", attribute = true)
+    private Map<String,String> error;
 
 }

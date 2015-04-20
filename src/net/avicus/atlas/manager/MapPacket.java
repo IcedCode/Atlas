@@ -1,4 +1,4 @@
-package net.avicus.atlas.rotation;
+package net.avicus.atlas.manager;
 
 import java.io.File;
 import java.io.InputStream;

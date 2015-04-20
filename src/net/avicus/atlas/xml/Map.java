@@ -2,6 +2,7 @@ package net.avicus.atlas.xml;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.Atlas;
 import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.components.Spawn;
@@ -10,11 +11,18 @@ import net.avicus.atlas.xml.elements.*;
 import net.avicus.atlas.xml.elements.event.*;
 import org.simpleframework.xml.*;
 
+import java.io.InputStream;
 import java.util.List;
 
 @ToString
 @Root
 public class Map implements Assembler {
+
+    public static Map parse(InputStream input) throws Exception {
+        Map map = Atlas.getSerializer().read(Map.class, input);
+        map.assemble();
+        return map;
+    }
 
     public void assemble() throws AssemblerException {
         for (Author author : authors)
