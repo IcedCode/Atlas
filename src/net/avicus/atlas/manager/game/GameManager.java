@@ -23,7 +23,7 @@ public class GameManager extends Manager {
         teams.add(teams.getSpectators(), player);
 
         SpawnManager spawns = match.getManager(SpawnManager.class);
-        player.teleport(spawns.getLocation(spawns.getSpawn(teams.getSpectators())));
+        spawns.spawn(teams.getSpectators(), player);
     }
 
     @EventHandler
