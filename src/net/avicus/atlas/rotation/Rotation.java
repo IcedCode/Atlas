@@ -3,21 +3,20 @@ package net.avicus.atlas.rotation;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
-import net.avicus.atlas.util.Task;
 
 import java.util.List;
 
 @ToString
 public class Rotation {
 
-    @Getter static Rotation rotation;
+    @Getter static Rotation instance;
 
     @Getter final List<Match> matches;
 
     private int index = 0;
 
     public Rotation(List<Match> matches) {
-        rotation = this;
+        instance = this;
         this.matches = matches;
     }
 

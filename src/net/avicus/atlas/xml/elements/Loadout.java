@@ -6,8 +6,9 @@ import net.avicus.atlas.xml.Map;
 import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.components.Effect;
+import net.avicus.atlas.xml.components.Feature;
+import net.avicus.atlas.xml.components.FeatureType;
 import net.avicus.atlas.xml.components.Item;
-import net.avicus.atlas.xml.components.LoadoutFeature;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 
@@ -18,8 +19,8 @@ import java.util.List;
 public class Loadout implements Assembler {
 
     @Getter
-    @Attribute
-    String name;
+    @Attribute(required = false)
+    String name = "default";
 
     @Getter
     @ElementList(name="item", type=Item.class, inline = true, required = false)
@@ -30,8 +31,15 @@ public class Loadout implements Assembler {
     List<Effect> effects = new ArrayList<Effect>();
 
     @Getter
-    @ElementList(entry="feature", type=LoadoutFeature.class, inline = true, required = false)
-    List<LoadoutFeature> features = new ArrayList<LoadoutFeature>();
+    @ElementList(entry="feature", type=Feature.class, inline = true, required = false)
+    List<Feature> features = new ArrayList<Feature>();
+
+    public boolean hasFeature(FeatureType type) {
+        for (Feature feature : features)
+            if (feature.getType() == type)
+                return true;
+        return false;
+    }
 
     @Override
     public void assemble(Map map) throws AssemblerException {

@@ -16,5 +16,6 @@
         <lang id="invalid-arguments">Invalid arguments provided.</lang>
         <lang id="no-permission">You don't have permission.</lang>
         <lang id="error-occurred">An error has occurred.</lang>
+        <lang id="not-player">You must be a player to do that.</lang>
     </error>
 </locale>

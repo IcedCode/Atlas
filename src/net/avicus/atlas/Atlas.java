@@ -2,6 +2,7 @@ package net.avicus.atlas;
 
 import net.avicus.atlas.chat.locale.Lang;
 import net.avicus.atlas.chat.locale.Locale;
+import net.avicus.atlas.xml.components.FeatureType;
 import net.avicus.atlas.xml.data.*;
 import net.avicus.atlas.xml.transformers.*;
 import org.simpleframework.xml.Serializer;
@@ -58,12 +59,11 @@ public class Atlas {
         {
             rm.bind(UUID.class, UUIDTransform.class);
             rm.bind(Version.class, VersionTransform.class);
-
             rm.bind(ItemSlot.class, ItemSlotTransform.class);
             rm.bind(Position.class, PositionTransform.class);
             rm.bind(TeamColor.class, TeamColorTransform.class);
-
             rm.bind(Duration.class, DurationTransform.class);
+            rm.bind(FeatureType.class, FeatureTransform.class);
         }
 
         return new Persister(rm);

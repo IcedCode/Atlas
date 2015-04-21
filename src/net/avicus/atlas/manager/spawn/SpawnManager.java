@@ -24,7 +24,7 @@ public class SpawnManager extends Manager {
         Spawn spawn = getSpawn(team);
         player.teleport(getLocation(spawn));
 
-        PlayerSpawnEvent call = EventUtils.call(new PlayerSpawnEvent(player));
+        EventUtils.call(new PlayerSpawnEvent(player, spawn));
     }
 
     public Spawn getSpawn(Team team) {

@@ -1,12 +1,10 @@
 package net.avicus.atlas.xml.data;
 
 import lombok.Getter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
 public class TeamColor {
 
     private static List<TeamColor> list = new ArrayList<TeamColor>();
@@ -37,6 +35,10 @@ public class TeamColor {
             if (color.getName().equalsIgnoreCase(name))
                 return color;
         throw new Exception("Unknown team color: " + name);
+    }
+
+    public String toString() {
+        return name.toLowerCase();
     }
 
 }

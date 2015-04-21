@@ -3,10 +3,14 @@ package net.avicus.atlas.xml.components;
 import lombok.Getter;
 import org.simpleframework.xml.Attribute;
 
-public class LoadoutFeature {
+public class Feature {
 
     @Getter
     @Attribute
-    String type;
+    FeatureType type;
+
+    @Getter
+    @Attribute(required = false)
+    String settings;
 
 }

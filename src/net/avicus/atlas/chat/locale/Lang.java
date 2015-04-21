@@ -1,7 +1,6 @@
 package net.avicus.atlas.chat.locale;
 
 import lombok.Getter;
-import lombok.ToString;
 import org.simpleframework.xml.Root;
 
 import java.lang.reflect.Field;
@@ -21,6 +20,7 @@ public class Lang extends LocalizedMessage {
     public static Lang ERROR_INVALID_ARGUMENTS = new Lang("error", "invalid-arguments");
     public static Lang ERROR_NO_PERMISSION = new Lang("error", "no-permission");
     public static Lang ERROR_ERROR_OCCURRED = new Lang("error", "error-occurred");
+    public static Lang ERROR_NOT_PLAYER = new Lang("error", "not-player");
 
     @Getter final String category;
     @Getter final String id;

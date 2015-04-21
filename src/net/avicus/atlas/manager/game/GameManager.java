@@ -1,10 +1,8 @@
 package net.avicus.atlas.manager.game;
 
 import net.avicus.atlas.event.MatchOpenEvent;
-import net.avicus.atlas.event.MatchStateChangeEvent;
 import net.avicus.atlas.manager.Manager;
 import net.avicus.atlas.manager.spawn.SpawnManager;
-import net.avicus.atlas.manager.state.StateManager;
 import net.avicus.atlas.manager.team.TeamManager;
 import net.avicus.atlas.match.Match;
 import org.bukkit.Bukkit;
@@ -35,13 +33,6 @@ public class GameManager extends Manager {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         spawnSpectator(event.getPlayer());
-
-        System.out.println(match.getManager(StateManager.class).getTime());
-    }
-
-    @EventHandler
-    public void onMatchStateChange(MatchStateChangeEvent event) {
-        System.out.println(event.getFrom() + " to " + event.getTo());
     }
 
 }

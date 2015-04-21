@@ -1,9 +1,10 @@
 package net.avicus.atlas.xml.components;
 
 import lombok.Getter;
-import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.Map;
+import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
+import net.avicus.atlas.xml.elements.Loadout;
 import net.avicus.atlas.xml.elements.RegionSet;
 import net.avicus.atlas.xml.elements.Team;
 import org.simpleframework.xml.Attribute;
@@ -14,6 +15,10 @@ public class Spawn implements Assembler {
     @Getter
     @Attribute(name = "team", required = false)
     String teamColor = "aqua";
+
+    @Getter
+    @Attribute(name = "loadout", required = false)
+    String loadoutName;
 
     @Getter
     @Attribute(required = false)
@@ -30,11 +35,15 @@ public class Spawn implements Assembler {
     @Getter
     Team team;
 
+    @Getter
+    Loadout loadout;
+
     @Override
     public void assemble(Map map) throws AssemblerException {
         team = map.getTeamByColor(teamColor);
         if (team == null)
             throw new AssemblerException("Unknown team: \"" + teamColor + "\"");
+        loadout = map.getLoadoutByName(loadoutName);
         regions.assemble(map);
     }
 }

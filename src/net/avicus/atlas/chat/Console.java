@@ -10,4 +10,8 @@ public class Console {
         Bukkit.getConsoleSender().sendMessage(string.translate(ChatUtils.getLocale(Bukkit.getConsoleSender())));
     }
 
+    public static void debug(String message) {
+        Bukkit.getConsoleSender().sendMessage(message);
+    }
+
 }
