@@ -1,6 +1,5 @@
 package net.avicus.atlas.manager.loadout;
 
-import net.avicus.atlas.chat.Console;
 import net.avicus.atlas.util.MetaDataUtils;
 import net.avicus.atlas.util.Task;
 import org.bukkit.Bukkit;
@@ -10,11 +9,13 @@ public class FeatureTask extends Task {
 
     @Override
     public void run() throws Exception {
-        Console.debug("Running feature task...");
         for (Player player : Bukkit.getOnlinePlayers()) {
+            if (MetaDataUtils.getBoolean(player, "disable-hunger", false))
+                player.setFoodLevel(20);
+
             // If player is spectator, no need to hide other spectators.
             if (MetaDataUtils.getBoolean(player, "spectator", false))
-                return;
+                continue;
 
             for (Player target : Bukkit.getOnlinePlayers()) {
                 boolean hide = MetaDataUtils.getBoolean(target, "spectator", false);

@@ -4,6 +4,7 @@ public enum FeatureType {
 
     FLY,
     SPECTATOR,
+    DISABLE_HUNGER
 
 
 }

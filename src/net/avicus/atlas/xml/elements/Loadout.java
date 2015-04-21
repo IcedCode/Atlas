@@ -2,6 +2,7 @@ package net.avicus.atlas.xml.elements;
 
 import lombok.Getter;
 import lombok.ToString;
+import net.avicus.atlas.chat.Console;
 import net.avicus.atlas.xml.Map;
 import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
@@ -31,7 +32,7 @@ public class Loadout implements Assembler {
     List<Effect> effects = new ArrayList<Effect>();
 
     @Getter
-    @ElementList(entry="feature", type=Feature.class, inline = true, required = false)
+    @ElementList(name="feature", type=Feature.class, inline = true, required = false)
     List<Feature> features = new ArrayList<Feature>();
 
     public boolean hasFeature(FeatureType type) {

@@ -20,7 +20,7 @@
 
     <target name="compile" depends="clean">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src}" destdir="${classes.dir}">
+        <javac srcdir="${src}" debug="on" destdir="${classes.dir}">
             <classpath>
                 <fileset dir="${lib}">
                     <include name="**/*.jar" />

@@ -1,5 +1,7 @@
 package net.avicus.atlas.manager.loadout;
 
+import net.avicus.atlas.chat.Console;
+import net.avicus.atlas.event.MatchCloseEvent;
 import net.avicus.atlas.event.MatchOpenEvent;
 import net.avicus.atlas.event.PlayerSpawnEvent;
 import net.avicus.atlas.manager.Manager;
@@ -39,6 +41,9 @@ public class LoadoutManager extends Manager {
         boolean spectator = loadout.hasFeature(FeatureType.SPECTATOR);
         MetaDataUtils.set(player, "spectator", spectator);
 
+        boolean disableHunger = loadout.hasFeature(FeatureType.DISABLE_HUNGER);
+        MetaDataUtils.set(player, "disable-hunger", disableHunger);
+
         // Items
         for (Item item : loadout.getItems()) {
             ItemStack stack = new ItemStack(item.getMaterial(), item.getCount(), item.getData());
@@ -52,16 +57,30 @@ public class LoadoutManager extends Manager {
 
             if (item.getEnchantments() != null)
                 for (Enchant enchant : item.getEnchantments())
-                    stack.addEnchantment(enchant.getEnchantment(), enchant.getLevel());
+                    stack.addUnsafeEnchantment(enchant.getEnchantment(), enchant.getLevel());
+
+            if (item.getSlot().getValue() >= 100) {
+                ItemStack[] armor = player.getInventory().getArmorContents();
+                armor[item.getSlot().getValue() - 100] = stack;
+                player.getInventory().setArmorContents(armor);
+            }
+            else {
+                player.getInventory().setItem(item.getSlot().getValue(), stack);
+            }
         }
     }
 
     @EventHandler
     public void onPlayerSpawn(PlayerSpawnEvent event) {
-        Loadout loadout = event.getSpawn().getLoadout();
-        if (loadout == null)
-            loadout = getDefault();
-        give(loadout, event.getPlayer());
+        try {
+
+            Loadout loadout = event.getSpawn().getLoadout();
+            if (loadout == null)
+                loadout = getDefault();
+            give(loadout, event.getPlayer());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @EventHandler
@@ -70,7 +89,7 @@ public class LoadoutManager extends Manager {
     }
 
     @EventHandler
-    public void onMatchClose(MatchOpenEvent event) {
+    public void onMatchClose(MatchCloseEvent event) {
         listener.cancel();
     }
 

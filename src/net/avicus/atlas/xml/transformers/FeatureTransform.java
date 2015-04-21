@@ -7,7 +7,7 @@ public class FeatureTransform implements Transform<FeatureType> {
 
     @Override
     public FeatureType read(String raw) throws Exception {
-        return FeatureType.valueOf(raw.toUpperCase());
+        return FeatureType.valueOf(raw.replace("-", "_").toUpperCase());
     }
 
     @Override
