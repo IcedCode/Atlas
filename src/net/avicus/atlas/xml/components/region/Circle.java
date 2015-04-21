@@ -21,4 +21,9 @@ public class Circle extends Region {
         if (radius < 0)
             throw new AssemblerException("Cannot have radius of less than 0");
     }
+
+    @Override
+    public Position getRandomPosition() {
+        return null;
+    }
 }

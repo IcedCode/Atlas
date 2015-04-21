@@ -15,7 +15,7 @@ import org.simpleframework.xml.ElementListUnion;
 import java.util.List;
 
 @ToString
-public abstract class Event implements Assembler {
+public abstract class GameEvent implements Assembler {
 
     @Getter
     @Attribute(name = "condition", required = false)

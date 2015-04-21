@@ -11,6 +11,7 @@ public class TeamColor {
 
     private static List<TeamColor> list = new ArrayList<TeamColor>();
 
+    public static TeamColor AQUA = new TeamColor("AQUA", "AQUA", "CYAN");
     public static TeamColor RED = new TeamColor("RED", "RED", "RED");
     public static TeamColor BLUE = new TeamColor("BLUE", "BLUE", "LIGHT_BLUE");
     public static TeamColor GREEN = new TeamColor("GREEN", "DARK_GREEN", "GREEN");

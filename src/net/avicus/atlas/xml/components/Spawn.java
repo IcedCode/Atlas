@@ -12,8 +12,16 @@ import org.simpleframework.xml.Element;
 public class Spawn implements Assembler {
 
     @Getter
-    @Attribute(name = "team")
-    String teamName;
+    @Attribute(name = "team", required = false)
+    String teamColor = "aqua";
+
+    @Getter
+    @Attribute(required = false)
+    float yaw = 0;
+
+    @Getter
+    @Attribute(required = false)
+    float pitch = 0;
 
     @Getter
     @Element
@@ -24,9 +32,9 @@ public class Spawn implements Assembler {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        team = map.getTeamByColor(teamName);
+        team = map.getTeamByColor(teamColor);
         if (team == null)
-            throw new AssemblerException("Unknown team: \"" + teamName + "\"");
+            throw new AssemblerException("Unknown team: \"" + teamColor + "\"");
         regions.assemble(map);
     }
 }

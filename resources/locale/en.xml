@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locale>
-    <atlas>
+    <console>
         <lang id="boot">Atlas version {0} is starting up.</lang>
         <lang id="shutdown">Atlas version {0} is shutting down.</lang>
-    </atlas>
+        <lang id="state-change">Match state changed from {0} to {1}.</lang>
+    </console>
 
     <ui>
         <lang id="version">This server is currently running Atlas version {0}.</lang>

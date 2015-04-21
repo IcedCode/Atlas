@@ -8,8 +8,8 @@ import net.avicus.atlas.chat.locale.Lang;
 import net.avicus.atlas.command.AtlasCommand;
 import net.avicus.atlas.command.ManagerCommands;
 import net.avicus.atlas.match.Match;
-import net.avicus.atlas.manager.LocalMap;
-import net.avicus.atlas.manager.Manager;
+import net.avicus.atlas.rotation.folder.LocalMap;
+import net.avicus.atlas.rotation.Rotation;
 import net.avicus.atlas.util.ChatUtils;
 import net.avicus.atlas.util.yaml.Config;
 import org.bukkit.ChatColor;
@@ -34,7 +34,7 @@ public class AtlasPlugin extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        Console.log(Lang.ATLAS_BOOT.with(getDescription().getVersion()));
+        Console.log(Lang.CONSOLE_BOOT.with(getDescription().getVersion()));
 
         File configFile = new File(getDataFolder(), "config.yml");
 
@@ -56,7 +56,7 @@ public class AtlasPlugin extends JavaPlugin {
     }
 
     public void onDisable() {
-        Console.log(Lang.ATLAS_SHUTDOWN.with(getDescription().getVersion()));
+        Console.log(Lang.CONSOLE_SHUTDOWN.with(getDescription().getVersion()));
     }
 
     private void loadRotation() {
@@ -65,9 +65,9 @@ public class AtlasPlugin extends JavaPlugin {
         for (String name : config.getStringList("rotation"))
             matches.add(new Match(new LocalMap(new File("maps", name))));
 
-        Manager manager = new Manager(matches);
+        Rotation rotation = new Rotation(matches);
         try {
-            manager.begin();
+            rotation.begin();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class AtlasPlugin extends JavaPlugin {
     @Override
      public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         try {
-            this.commands.execute(cmd.getName(), args, sender, sender);
+            commands.execute(cmd.getName(), args, sender, sender);
         } catch (CommandPermissionsException e) {
             sender.sendMessage(ChatColor.RED + Lang.ERROR_NO_PERMISSION.translate(ChatUtils.getLocale(sender)));
         } catch (MissingNestedCommandException e) {

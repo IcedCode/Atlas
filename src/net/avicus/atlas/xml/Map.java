@@ -33,7 +33,7 @@ public class Map implements Assembler {
             spawn.assemble(this);
         for (ConditionSet condition : conditions)
             condition.assemble(this);
-        for (Event event : events)
+        for (GameEvent event : events)
             event.assemble(this);
         for (Monument monument : monuments)
             monument.assemble(this);
@@ -53,6 +53,10 @@ public class Map implements Assembler {
     @Getter
     @ElementList
     List<Author> authors;
+
+    @Getter
+    @ElementList
+    List<State> states;
 
     @Getter
     @ElementList(required = false)
@@ -76,7 +80,7 @@ public class Map implements Assembler {
             @ElementList(name = "move", type = Move.class, inline = true),
             @ElementList(entry = "remove-drops", type = RemoveDrops.class, inline = true)
     })
-    List<Event> events;
+    List<GameEvent> events;
 
     @Getter
     @ElementList(required = false)

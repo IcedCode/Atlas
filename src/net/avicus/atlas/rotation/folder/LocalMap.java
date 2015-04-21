@@ -1,4 +1,4 @@
-package net.avicus.atlas.manager;
+package net.avicus.atlas.rotation.folder;
 
 import org.apache.commons.io.FileUtils;
 
@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class LocalMap implements MapPacket {
+public class LocalMap implements MapFolder {
 
     private File folder;
 

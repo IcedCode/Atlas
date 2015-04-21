@@ -46,7 +46,7 @@ public class Locale {
 
     @Root
     @ElementMap(key = "id", attribute = true)
-    private Map<String,String> atlas;
+    private Map<String,String> console;
 
     @Root
     @ElementMap(key = "id", attribute = true)

@@ -30,6 +30,6 @@ public class Monument implements Assembler {
     public void assemble(Map map) throws AssemblerException {
         team = map.getTeamByColor(owner);
         if (team == null)
-            throw new AssemblerException("Unknown team: \"" + owner + "\"");
+            throw new AssemblerException("Unknown team \"" + owner + "\"");
     }
 }

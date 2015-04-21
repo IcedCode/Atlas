@@ -1,4 +1,4 @@
-package net.avicus.atlas.manager;
+package net.avicus.atlas.rotation.folder;
 
 import java.io.File;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ import java.io.InputStream;
  * of the server root directory. It is intended to be relocated to the root
  * directory and assmebled into a Map.
  */
-public interface MapPacket {
+public interface MapFolder {
 
     public void prepare() throws Exception;
 

@@ -31,4 +31,9 @@ public class Cuboid extends Region {
         min = newMin;
         max = newMax;
     }
+
+    @Override
+    public Position getRandomPosition() {
+        return null;
+    }
 }

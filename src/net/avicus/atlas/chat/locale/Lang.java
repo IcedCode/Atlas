@@ -10,8 +10,9 @@ import java.util.Map;
 @Root
 public class Lang extends LocalizedMessage {
 
-    public static Lang ATLAS_BOOT = new Lang("atlas", "boot");
-    public static Lang ATLAS_SHUTDOWN = new Lang("atlas", "shutdown");
+    public static Lang CONSOLE_BOOT = new Lang("console", "boot");
+    public static Lang CONSOLE_SHUTDOWN = new Lang("console", "shutdown");
+    public static Lang CONSOLE_STATE_CHANGE = new Lang("console", "state-change");
 
     public static Lang UI_VERSION = new Lang("ui", "version");
     public static Lang UI_VERSION_LATEST = new Lang("ui", "version-latest");

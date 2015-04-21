@@ -5,7 +5,7 @@ import net.avicus.atlas.xml.Map;
 import net.avicus.atlas.xml.assembler.AssemblerException;
 
 @ToString(callSuper = true)
-public class Kill extends Event {
+public class Kill extends GameEvent {
     @Override
     public void assemble(Map map) throws AssemblerException {
 

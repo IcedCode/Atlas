@@ -26,4 +26,8 @@ public class Cylinder extends Region {
             throw new AssemblerException("Cannot have height of less than 0");
     }
 
+    @Override
+    public Position getRandomPosition() {
+        return null;
+    }
 }
