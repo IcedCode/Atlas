@@ -23,6 +23,11 @@ public class Circle extends Region {
     }
 
     @Override
+    public boolean isInside(Position position) {
+        return false;
+    }
+
+    @Override
     public Position getRandomPosition() {
         return null;
     }

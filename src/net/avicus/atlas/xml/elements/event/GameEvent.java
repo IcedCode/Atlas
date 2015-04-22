@@ -34,6 +34,13 @@ public abstract class GameEvent implements Assembler {
     @Getter
     ConditionSet condition;
 
+    public <T extends Action> T getAction(Class<T> type) {
+        for (Action action : actions)
+            if (action.getClass() == type)
+                return (T) action;
+        return null;
+    }
+
     @Override
     public void assemble(Map map) throws AssemblerException {
         condition = map.getConditionByName(conditionName);

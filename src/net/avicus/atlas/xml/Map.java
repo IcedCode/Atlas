@@ -113,6 +113,5 @@ public class Map implements Assembler {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-
     }
 }

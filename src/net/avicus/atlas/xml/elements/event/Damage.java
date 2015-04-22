@@ -8,6 +8,6 @@ import net.avicus.atlas.xml.assembler.AssemblerException;
 public class Damage extends GameEvent {
     @Override
     public void assemble(Map map) throws AssemblerException {
-
+        super.assemble(map);
     }
 }

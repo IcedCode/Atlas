@@ -7,6 +7,8 @@ import net.avicus.atlas.xml.data.Position;
 @ToString
 public abstract class Region implements Assembler {
 
+    public abstract boolean isInside(Position position);
+
     public abstract Position getRandomPosition();
 
 }

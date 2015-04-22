@@ -33,6 +33,16 @@ public class Cuboid extends Region {
     }
 
     @Override
+    public boolean isInside(Position position) {
+        boolean inside = false;
+        if (position.getX() >= min.getX() && position.getX() <= max.getX())
+            if (position.getY() >= min.getY() && position.getY() <= max.getY())
+                if (position.getZ() >= min.getZ() && position.getZ() <= max.getZ())
+                    inside = true;
+        return inside;
+    }
+
+    @Override
     public Position getRandomPosition() {
         return null;
     }

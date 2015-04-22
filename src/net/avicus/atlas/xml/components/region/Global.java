@@ -7,28 +7,16 @@ import net.avicus.atlas.xml.data.Position;
 import org.simpleframework.xml.Attribute;
 
 @ToString
-public class Cylinder extends Region {
-
-    @Attribute
-    Position center;
-
-    @Attribute
-    int radius;
-
-    @Attribute
-    int height;
+public class Global extends Region {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        if (radius < 0)
-            throw new AssemblerException("Cannot have radius of less than 0");
-        if (height < 0)
-            throw new AssemblerException("Cannot have height of less than 0");
+
     }
 
     @Override
     public boolean isInside(Position position) {
-        return false;
+        return true;
     }
 
     @Override

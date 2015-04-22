@@ -2,6 +2,7 @@ package net.avicus.atlas.xml.data;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 
 public class Position {
 
@@ -10,6 +11,10 @@ public class Position {
     @Getter @Setter double z;
     @Getter @Setter double yaw;
     @Getter @Setter double pitch;
+
+    public Position(Location location) {
+        this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+    }
 
     public Position(double x, double y, double z, double yaw, double pitch) {
         this.x = x;

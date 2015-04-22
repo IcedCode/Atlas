@@ -5,6 +5,7 @@ import lombok.ToString;
 import net.avicus.atlas.event.MatchCloseEvent;
 import net.avicus.atlas.event.MatchOpenEvent;
 import net.avicus.atlas.manager.Manager;
+import net.avicus.atlas.manager.event.EventManager;
 import net.avicus.atlas.manager.game.GameManager;
 import net.avicus.atlas.manager.loadout.LoadoutManager;
 import net.avicus.atlas.manager.spawn.SpawnManager;
@@ -46,6 +47,7 @@ public class Match {
         managers.add(new TeamManager(this));
         managers.add(new SpawnManager(this));
         managers.add(new LoadoutManager(this));
+        managers.add(new EventManager(this));
     }
 
     public <T extends Manager> T getManager(Class<T> type) {

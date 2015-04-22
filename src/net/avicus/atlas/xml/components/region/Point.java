@@ -18,6 +18,11 @@ public class Point extends Region {
     }
 
     @Override
+    public boolean isInside(Position position) {
+        return this.position.equals(position);
+    }
+
+    @Override
     public Position getRandomPosition() {
         return position;
     }
