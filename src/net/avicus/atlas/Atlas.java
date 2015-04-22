@@ -27,7 +27,7 @@ public class Atlas {
         System.out.println("Executing locale tests.");
 
         for (Map.Entry<String, Locale> e : Locale.getList().entrySet()) {
-            System.out.println(e.getKey() + ".xml");
+            System.out.println(" > " + e.getKey() + ".xml");
             List<Lang> langs = new ArrayList<Lang>();
 
             for (Field field : Lang.class.getDeclaredFields())
@@ -46,9 +46,9 @@ public class Atlas {
             }
 
             if (i > 0)
-                System.out.println("### " + i + " errors ###");
+                System.out.println("\n### " + i + " errors ###");
             else
-                System.out.println("No errors found.");
+                System.out.println("\nNo errors found.");
         }
 
     }

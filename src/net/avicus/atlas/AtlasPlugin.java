@@ -1,21 +1,12 @@
 package net.avicus.atlas;
 
-import com.sk89q.bukkit.util.CommandsManagerRegistration;
-import com.sk89q.minecraft.util.commands.*;
 import lombok.Getter;
 import net.avicus.atlas.chat.Console;
 import net.avicus.atlas.chat.locale.Lang;
-import net.avicus.atlas.command.AtlasCommand;
-import net.avicus.atlas.command.ManagerCommands;
 import net.avicus.atlas.match.Match;
-import net.avicus.atlas.rotation.folder.LocalMap;
 import net.avicus.atlas.rotation.Rotation;
-import net.avicus.atlas.util.ChatUtils;
+import net.avicus.atlas.rotation.folder.LocalMap;
 import net.avicus.atlas.util.yaml.Config;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -28,7 +19,6 @@ public class AtlasPlugin extends JavaPlugin {
 
     @Getter static AtlasPlugin instance;
 
-    private CommandsManager<CommandSender> commands;
     private Config config;
 
     public void onEnable() {
@@ -74,36 +64,7 @@ public class AtlasPlugin extends JavaPlugin {
     }
 
     private void loadCommands() {
-        commands = new CommandsManager<CommandSender>() {
-            @Override
-            public boolean hasPermission(CommandSender sender, String perm) {
-                return sender instanceof ConsoleCommandSender || sender.hasPermission(perm);
-            }
-        };
-        CommandsManagerRegistration register = new CommandsManagerRegistration(this, commands);
-
-        register.register(AtlasCommand.class);
-        register.register(ManagerCommands.class);
-    }
-
-    @Override
-     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        try {
-            commands.execute(cmd.getName(), args, sender, sender);
-        } catch (CommandPermissionsException e) {
-            sender.sendMessage(ChatColor.RED + Lang.ERROR_NO_PERMISSION.translate(ChatUtils.getLocale(sender)));
-        } catch (MissingNestedCommandException e) {
-            sender.sendMessage(ChatColor.RED + e.getUsage());
-        } catch (CommandUsageException e) {
-            sender.sendMessage(ChatColor.RED + e.getMessage());
-            sender.sendMessage(ChatColor.RED + e.getUsage());
-        } catch (WrappedCommandException e) {
-            sender.sendMessage(ChatColor.RED + Lang.ERROR_ERROR_OCCURRED.translate(ChatUtils.getLocale(sender)));
-            e.printStackTrace();
-        } catch (CommandException e) {
-            sender.sendMessage(ChatColor.RED + e.getMessage());
-        }
-        return true;
+        // todo later.
     }
 
 }
