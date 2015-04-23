@@ -28,7 +28,7 @@ public class Monument implements Assembler {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        team = map.getTeamByColor(owner);
+        team = map.getTeamById(owner);
         if (team == null)
             throw new AssemblerException("Unknown team \"" + owner + "\"");
     }

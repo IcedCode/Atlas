@@ -3,7 +3,6 @@ package net.avicus.atlas.xml.elements.event.action;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.xml.Map;
-import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.elements.Loadout;
 import org.simpleframework.xml.Attribute;
@@ -25,7 +24,7 @@ public class ApplyLoadout extends Action {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        loadout = map.getLoadoutByName(name);
+        loadout = map.getLoadoutById(name);
         if (loadout == null)
             throw new AssemblerException("Unknown loadout: \"" + name + "\"");
     }

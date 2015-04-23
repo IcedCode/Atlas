@@ -1,6 +1,5 @@
 package net.avicus.atlas.manager.loadout;
 
-import net.avicus.atlas.chat.Console;
 import net.avicus.atlas.event.MatchCloseEvent;
 import net.avicus.atlas.event.MatchOpenEvent;
 import net.avicus.atlas.event.PlayerSpawnEvent;
@@ -27,7 +26,7 @@ public class LoadoutManager extends Manager {
     }
 
     public Loadout getDefault() {
-        Loadout def = match.getMap().getLoadoutByName("default");
+        Loadout def = match.getMap().getLoadoutById("default");
         if (def == null)
             return new Loadout();
         return def;

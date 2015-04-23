@@ -13,6 +13,10 @@ public class Team implements Assembler {
 
     @Getter
     @Attribute
+    String id;
+
+    @Getter
+    @Attribute
     TeamColor color;
 
     @Getter

@@ -11,7 +11,7 @@ public class Cancel extends Action {
 
     @Getter
     @Text(required = false)
-    boolean value = true;
+    boolean cancel = true;
 
     @Override
     public void assemble(Map map) throws AssemblerException {

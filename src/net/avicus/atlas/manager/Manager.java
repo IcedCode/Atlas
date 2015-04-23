@@ -1,5 +1,6 @@
 package net.avicus.atlas.manager;
 
+import lombok.Getter;
 import net.avicus.atlas.match.Match;
 import org.bukkit.event.Listener;
 
@@ -8,7 +9,7 @@ import org.bukkit.event.Listener;
  */
 public abstract class Manager implements Listener {
 
-    protected Match match;
+    @Getter protected Match match;
 
     public Manager(Match match) {
         this.match = match;

@@ -5,7 +5,6 @@ import lombok.ToString;
 import net.avicus.atlas.xml.Map;
 import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
-import net.avicus.atlas.xml.components.Condition;
 import net.avicus.atlas.xml.elements.ConditionSet;
 import net.avicus.atlas.xml.elements.event.action.*;
 import org.simpleframework.xml.Attribute;
@@ -43,7 +42,7 @@ public abstract class GameEvent implements Assembler {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        condition = map.getConditionByName(conditionName);
+        condition = map.getConditionById(conditionName);
         if (conditionName != null && condition == null)
             throw new AssemblerException("Unknown condition: \"" + conditionName + "\"");
         for (Action action : actions)

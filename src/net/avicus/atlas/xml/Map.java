@@ -90,28 +90,37 @@ public class Map implements Assembler {
     @ElementList(required = false)
     List<Loadout> loadouts;
 
-    public Loadout getLoadoutByName(String name) {
+    public Loadout getLoadoutById(String id) {
         for (Loadout loadout : loadouts)
-            if (loadout.getName().equalsIgnoreCase(name))
+            if (loadout.getId().equalsIgnoreCase(id))
                 return loadout;
         return null;
     }
 
-    public Team getTeamByColor(String color) {
+    public Team getTeamById(String id) {
         for (Team team : teams)
-            if (team.getColor().getName().equalsIgnoreCase(color))
+            if (team.getId().equalsIgnoreCase(id))
                 return team;
         return null;
     }
 
-    public ConditionSet getConditionByName(String name) {
+    public ConditionSet getConditionById(String id) {
         for (ConditionSet condition : conditions)
-            if (condition.getName().equalsIgnoreCase(name))
+            if (condition.getId().equalsIgnoreCase(id))
                 return condition;
+        return null;
+    }
+
+    public Spawn getSpawnById(String id) {
+        for (Spawn spawn : spawns)
+            if (spawn.getId().equalsIgnoreCase(id))
+                return spawn;
         return null;
     }
 
     @Override
     public void assemble(Map map) throws AssemblerException {
+        if (getTeamById("spectators") == null)
+            throw new AssemblerException("Spectators team must be defined!");
     }
 }

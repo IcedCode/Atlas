@@ -13,11 +13,11 @@ public class TeamManager extends Manager {
     }
 
     public Team getSpectators() {
-        return match.getMap().getTeamByColor("aqua");
+        return match.getMap().getTeamById("spectators");
     }
 
     public Team getTeam(Player player) {
-        return match.getMap().getTeamByColor(MetaDataUtils.getString(player, "team", null));
+        return match.getMap().getTeamById(MetaDataUtils.getString(player, "team", null));
     }
 
     public void add(Team team, Player player) {

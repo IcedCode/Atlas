@@ -4,23 +4,34 @@ import lombok.Getter;
 import net.avicus.atlas.chat.Console;
 import net.avicus.atlas.manager.Manager;
 import net.avicus.atlas.manager.event.check.RegionCheck;
+import net.avicus.atlas.manager.event.handler.CancelHandler;
+import net.avicus.atlas.manager.event.handler.TeleportHandler;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.xml.components.Condition;
 import net.avicus.atlas.xml.elements.event.Damage;
 import net.avicus.atlas.xml.elements.event.GameEvent;
+import net.avicus.atlas.xml.elements.event.action.Action;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings(value = "unchecked")
 public class EventManager extends Manager {
 
     @Getter List<Check> checks = new ArrayList<Check>();
+    @Getter List<Handler> handlers = new ArrayList<Handler>();
 
     public EventManager(Match match) {
         super(match);
+
+        // Checks
         checks.add(new RegionCheck());
+
+        // Handlers
+        handlers.add(new CancelHandler(this));
+        handlers.add(new TeleportHandler(this));
     }
 
     public boolean check(GameEvent event, List<Check> checks, Object value) {
@@ -59,7 +70,13 @@ public class EventManager extends Manager {
 
         for (Damage damage : events) {
             if (check(damage, checks, event.getEntity().getLocation())) {
-                event.setCancelled(true);
+                for (Action action : damage.getActions()) {
+                    for (Handler handler : handlers) {
+                        if (handler.getType() != action.getClass())
+                            continue;
+                        handler.handle(action, event);
+                    }
+                }
             }
         }
     }

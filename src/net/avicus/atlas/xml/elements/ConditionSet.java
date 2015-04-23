@@ -18,7 +18,7 @@ public class ConditionSet implements Assembler {
 
     @Getter
     @Attribute
-    String name;
+    String id;
 
     @Getter
     @Attribute(required = false)

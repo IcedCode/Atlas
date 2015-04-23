@@ -9,6 +9,6 @@ public class State {
 
     @Getter
     @Attribute
-    String name;
+    String id;
 
 }

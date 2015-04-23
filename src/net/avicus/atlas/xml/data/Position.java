@@ -3,6 +3,7 @@ package net.avicus.atlas.xml.data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
+import org.bukkit.World;
 
 public class Position {
 
@@ -26,6 +27,10 @@ public class Position {
 
     public Position(double x, double y, double z) {
         this(x, y, z, 0, 0);
+    }
+
+    public Location toLocation(World world) {
+        return new Location(world, x, y, z, (float) yaw, (float) pitch);
     }
 
     @Override

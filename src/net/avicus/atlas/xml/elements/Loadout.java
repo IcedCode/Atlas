@@ -21,7 +21,7 @@ public class Loadout implements Assembler {
 
     @Getter
     @Attribute(required = false)
-    String name = "default";
+    String id = "default";
 
     @Getter
     @ElementList(name="item", type=Item.class, inline = true, required = false)
