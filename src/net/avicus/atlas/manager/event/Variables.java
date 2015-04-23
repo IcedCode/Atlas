@@ -1,9 +1,11 @@
 package net.avicus.atlas.manager.event;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.HashMap;
 
+@ToString
 public class Variables {
 
     @Getter HashMap<String,Object> map = new HashMap<String,Object>();

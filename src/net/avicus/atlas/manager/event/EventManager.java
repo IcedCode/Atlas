@@ -1,6 +1,9 @@
 package net.avicus.atlas.manager.event;
 
 import lombok.Getter;
+import net.avicus.atlas.chat.Console;
+import net.avicus.atlas.event.MatchCloseEvent;
+import net.avicus.atlas.event.MatchOpenEvent;
 import net.avicus.atlas.event.VariablesRequestEvent;
 import net.avicus.atlas.manager.Manager;
 import net.avicus.atlas.manager.event.check.RegionCheck;
@@ -11,6 +14,7 @@ import net.avicus.atlas.util.EventUtils;
 import net.avicus.atlas.xml.components.Condition;
 import net.avicus.atlas.xml.elements.event.GameEvent;
 import net.avicus.atlas.xml.elements.event.action.Action;
+import org.bukkit.event.EventHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +36,10 @@ public class EventManager extends Manager {
         handlers.add(new TeleportPlayerHandler(this));
     }
 
-    public Variables getVariables(GameEvent event) {
+    public Variables getVariables() {
         Variables vars = new Variables();
 
-        VariablesRequestEvent call = EventUtils.call(new VariablesRequestEvent(event, vars));
+        VariablesRequestEvent call = EventUtils.call(new VariablesRequestEvent(vars));
 
         return call.getVariables();
     }
@@ -66,24 +70,21 @@ public class EventManager extends Manager {
         for (Action action : event.getActions()) {
             Object input = variables.get(action.getVar());
 
-            // todo: implement warning to map developers instead of exception that halts the server
             if (input == null)
-                throw new RuntimeException(event.getClass().getSimpleName() + " couldn't pass " + variables.toString() + " to action " + action.getClass().getSimpleName());
+                continue;
 
             for (Handler handler : handlers) {
                 if (handler.getVar() != null && !handler.getVar().equals(action.getVar()))
                     continue;
                 if (handler.getActionType() != action.getClass())
                     continue;
-                if (handler.getObjectType() != input.getClass())
+                if (!handler.getObjectType().isAssignableFrom(input.getClass()))
                     continue;
 
                 handler.handle(action, input);
                 break;
             }
         }
-
-
     }
 
     public <T extends GameEvent> List<T> getEvents(Class<T> type) {
@@ -92,6 +93,18 @@ public class EventManager extends Manager {
             if (event.getClass() == type)
                 list.add((T) event);
         return list;
+    }
+
+    private EventListener listener = new EventListener(this);
+
+    @EventHandler
+    public void onMatchOpen(MatchOpenEvent event) {
+        EventUtils.register(listener);
+    }
+
+    @EventHandler
+    public void onMatchClose(MatchCloseEvent event) {
+        EventUtils.unregister(listener);
     }
 
 }

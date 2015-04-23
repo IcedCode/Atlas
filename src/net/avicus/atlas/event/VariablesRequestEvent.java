@@ -8,11 +8,9 @@ import org.bukkit.event.HandlerList;
 
 public class VariablesRequestEvent extends Event {
 
-    @Getter final GameEvent event;
     @Getter final Variables variables;
 
-    public VariablesRequestEvent(GameEvent event, Variables variables) {
-        this.event = event;
+    public VariablesRequestEvent(Variables variables) {
         this.variables = variables;
     }
 

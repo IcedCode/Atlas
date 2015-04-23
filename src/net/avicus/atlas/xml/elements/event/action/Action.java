@@ -30,6 +30,8 @@ public abstract class Action implements Assembler {
     public abstract boolean validate();
 
     public void assemble(Map map) throws AssemblerException {
+        if (var == null)
+            var = getDefaultVar();
         boolean pass = validate();
         if (!pass)
             throw new AssemblerException("Invalid var value \"" + getVar() + "\"");

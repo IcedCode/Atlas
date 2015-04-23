@@ -26,7 +26,7 @@ public class Message extends Action {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        message = ChatUtils.addColors(message);
         super.assemble(map);
+        message = ChatUtils.addColors(message);
     }
 }
