@@ -6,6 +6,7 @@ import net.avicus.atlas.xml.assembler.AssemblerException;
 
 @ToString(callSuper = true)
 public class Move extends GameEvent {
+
     @Override
     public void assemble(Map map) throws AssemblerException {
 

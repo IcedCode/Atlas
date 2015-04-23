@@ -3,7 +3,6 @@ package net.avicus.atlas.xml.elements.event.action;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.xml.Map;
-import net.avicus.atlas.xml.assembler.Assembler;
 import net.avicus.atlas.xml.assembler.AssemblerException;
 import net.avicus.atlas.xml.components.Spawn;
 import net.avicus.atlas.xml.data.Position;
@@ -29,7 +28,19 @@ public class Teleport extends Action {
     }
 
     @Override
+    public String getDefaultVar() {
+        return "player";
+    }
+
+    @Override
+    public boolean validate() {
+        return var.equals(getDefaultVar());
+    }
+
+    @Override
     public void assemble(Map map) throws AssemblerException {
+        super.assemble(map);
+
         if (spawnId != null) {
             if (location != null)
                 throw new AssemblerException("Attributes spawn and location provided in teleport action but only one is necessary.");
@@ -39,4 +50,5 @@ public class Teleport extends Action {
         }
 
     }
+
 }

@@ -17,15 +17,27 @@ public class ApplyLoadout extends Action {
 
     @Getter
     @Text
-    String name;
+    String loadoutId;
 
     @Getter
     Loadout loadout;
 
     @Override
+    public String getDefaultVar() {
+        return "player";
+    }
+
+    @Override
+    public boolean validate() {
+        return var.equals(getDefaultVar());
+    }
+
+    @Override
     public void assemble(Map map) throws AssemblerException {
-        loadout = map.getLoadoutById(name);
+        super.assemble(map);
+
+        loadout = map.getLoadoutById(loadoutId);
         if (loadout == null)
-            throw new AssemblerException("Unknown loadout: \"" + name + "\"");
+            throw new AssemblerException("Unknown loadout: \"" + loadoutId + "\"");
     }
 }

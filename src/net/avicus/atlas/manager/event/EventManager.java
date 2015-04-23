@@ -1,18 +1,16 @@
 package net.avicus.atlas.manager.event;
 
 import lombok.Getter;
-import net.avicus.atlas.chat.Console;
+import net.avicus.atlas.event.VariablesRequestEvent;
 import net.avicus.atlas.manager.Manager;
 import net.avicus.atlas.manager.event.check.RegionCheck;
-import net.avicus.atlas.manager.event.handler.CancelHandler;
-import net.avicus.atlas.manager.event.handler.TeleportHandler;
+import net.avicus.atlas.manager.event.handler.CancelEventHandler;
+import net.avicus.atlas.manager.event.handler.TeleportPlayerHandler;
 import net.avicus.atlas.match.Match;
+import net.avicus.atlas.util.EventUtils;
 import net.avicus.atlas.xml.components.Condition;
-import net.avicus.atlas.xml.elements.event.Damage;
 import net.avicus.atlas.xml.elements.event.GameEvent;
 import net.avicus.atlas.xml.elements.event.action.Action;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +28,19 @@ public class EventManager extends Manager {
         checks.add(new RegionCheck());
 
         // Handlers
-        handlers.add(new CancelHandler(this));
-        handlers.add(new TeleportHandler(this));
+        handlers.add(new CancelEventHandler(this));
+        handlers.add(new TeleportPlayerHandler(this));
     }
 
-    public boolean check(GameEvent event, List<Check> checks, Object value) {
+    public Variables getVariables(GameEvent event) {
+        Variables vars = new Variables();
+
+        VariablesRequestEvent call = EventUtils.call(new VariablesRequestEvent(event, vars));
+
+        return call.getVariables();
+    }
+
+    public boolean check(GameEvent event, Object value) {
         if (event.getCondition() == null)
             return true;
 
@@ -56,29 +62,36 @@ public class EventManager extends Manager {
         return passed;
     }
 
+    public void handleActions(GameEvent event, Variables variables) {
+        for (Action action : event.getActions()) {
+            Object input = variables.get(action.getVar());
+
+            // todo: implement warning to map developers instead of exception that halts the server
+            if (input == null)
+                throw new RuntimeException(event.getClass().getSimpleName() + " couldn't pass " + variables.toString() + " to action " + action.getClass().getSimpleName());
+
+            for (Handler handler : handlers) {
+                if (handler.getVar() != null && !handler.getVar().equals(action.getVar()))
+                    continue;
+                if (handler.getActionType() != action.getClass())
+                    continue;
+                if (handler.getObjectType() != input.getClass())
+                    continue;
+
+                handler.handle(action, input);
+                break;
+            }
+        }
+
+
+    }
+
     public <T extends GameEvent> List<T> getEvents(Class<T> type) {
         List<T> list = new ArrayList<T>();
         for (GameEvent event : match.getMap().getEvents())
             if (event.getClass() == type)
                 list.add((T) event);
         return list;
-    }
-
-    @EventHandler
-    public void onDamage(EntityDamageEvent event) {
-        List<Damage> events = getEvents(Damage.class);
-
-        for (Damage damage : events) {
-            if (check(damage, checks, event.getEntity().getLocation())) {
-                for (Action action : damage.getActions()) {
-                    for (Handler handler : handlers) {
-                        if (handler.getType() != action.getClass())
-                            continue;
-                        handler.handle(action, event);
-                    }
-                }
-            }
-        }
     }
 
 }

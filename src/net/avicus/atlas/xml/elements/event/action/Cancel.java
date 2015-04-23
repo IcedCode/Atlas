@@ -14,7 +14,17 @@ public class Cancel extends Action {
     boolean cancel = true;
 
     @Override
+    public String getDefaultVar() {
+        return "event";
+    }
+
+    @Override
+    public boolean validate() {
+        return var.equals(getDefaultVar());
+    }
+
+    @Override
     public void assemble(Map map) throws AssemblerException {
-        // Nothing to check
+        super.assemble(map);
     }
 }

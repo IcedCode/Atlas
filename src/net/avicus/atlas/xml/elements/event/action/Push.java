@@ -18,7 +18,17 @@ public class Push extends Action {
     double vertical;
 
     @Override
+    public String getDefaultVar() {
+        return "player";
+    }
+
+    @Override
+    public boolean validate() {
+        return var.equals(getDefaultVar());
+    }
+
+    @Override
     public void assemble(Map map) throws AssemblerException {
-        // Nothing to check
+        super.assemble(map);
     }
 }

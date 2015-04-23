@@ -1,22 +1,23 @@
 package net.avicus.atlas.manager.event;
 
 import lombok.Getter;
+import net.avicus.atlas.manager.Manager;
 import net.avicus.atlas.xml.elements.event.action.Action;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 
-public abstract class Handler<A extends Action> {
+public abstract class Handler<A extends Action,O> {
 
-    protected final EventManager manager;
-    @Getter Class<A> type;
+    protected final Manager manager;
+    @Getter final String var;
+    @Getter final Class<A> actionType;
+    @Getter final Class<O> objectType;
 
-    public Handler(EventManager manager, Class<A> type) {
+    public Handler(Manager manager, String var, Class<A> actionType, Class<O> objectType) {
         this.manager = manager;
-        this.type = type;
+        this.var = var;
+        this.actionType = actionType;
+        this.objectType = objectType;
     }
 
-    public abstract void handle(A action, Cancellable input);
-
-    public abstract void handle(A action, Player input);
+    public abstract void handle(A event, O handle);
 
 }

@@ -18,7 +18,7 @@ public abstract class GameEvent implements Assembler {
 
     @Getter
     @Attribute(name = "condition", required = false)
-    String conditionName;
+    String conditionId;
 
     @Getter
     @ElementListUnion({
@@ -42,9 +42,9 @@ public abstract class GameEvent implements Assembler {
 
     @Override
     public void assemble(Map map) throws AssemblerException {
-        condition = map.getConditionById(conditionName);
-        if (conditionName != null && condition == null)
-            throw new AssemblerException("Unknown condition: \"" + conditionName + "\"");
+        condition = map.getConditionById(conditionId);
+        if (conditionId != null && condition == null)
+            throw new AssemblerException("Unknown condition: \"" + conditionId + "\"");
         for (Action action : actions)
             action.assemble(map);
     }
