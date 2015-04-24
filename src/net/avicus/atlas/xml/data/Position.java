@@ -43,4 +43,12 @@ public class Position {
         return output;
     }
 
+    public boolean equals(Position test) {
+        if (Math.floor(test.x) == Math.floor(x))
+            if (Math.floor(test.y) == Math.floor(y))
+                if (Math.floor(test.z) == Math.floor(z))
+                    return true;
+        return false;
+    }
+
 }

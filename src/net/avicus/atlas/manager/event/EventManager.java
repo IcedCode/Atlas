@@ -1,14 +1,12 @@
 package net.avicus.atlas.manager.event;
 
 import lombok.Getter;
-import net.avicus.atlas.chat.Console;
 import net.avicus.atlas.event.MatchCloseEvent;
 import net.avicus.atlas.event.MatchOpenEvent;
 import net.avicus.atlas.event.VariablesRequestEvent;
 import net.avicus.atlas.manager.Manager;
 import net.avicus.atlas.manager.event.check.RegionCheck;
-import net.avicus.atlas.manager.event.handler.CancelEventHandler;
-import net.avicus.atlas.manager.event.handler.TeleportPlayerHandler;
+import net.avicus.atlas.manager.event.handler.*;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.util.EventUtils;
 import net.avicus.atlas.xml.components.Condition;
@@ -34,13 +32,14 @@ public class EventManager extends Manager {
         // Handlers
         handlers.add(new CancelEventHandler(this));
         handlers.add(new TeleportPlayerHandler(this));
+        handlers.add(new ApplyLoadoutHandler(this));
+        handlers.add(new MergeEventHandler(this));
+        handlers.add(new MessagePlayerHandler(this));
+        handlers.add(new PushPlayerHandler(this));
     }
 
     public Variables getVariables() {
-        Variables vars = new Variables();
-
-        VariablesRequestEvent call = EventUtils.call(new VariablesRequestEvent(vars));
-
+        VariablesRequestEvent call = EventUtils.call(new VariablesRequestEvent(new Variables()));
         return call.getVariables();
     }
 

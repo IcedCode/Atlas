@@ -78,7 +78,8 @@ public class Map implements Assembler {
             @ElementList(name = "kill", type = Kill.class, inline = true),
             @ElementList(name = "damage", type = Damage.class, inline = true),
             @ElementList(name = "move", type = Move.class, inline = true),
-            @ElementList(entry = "remove-drops", type = RemoveDrops.class, inline = true)
+            @ElementList(entry = "pickup-item", type = PickupItem.class, inline = true),
+            @ElementList(entry = "drop-item", type = DropItem.class, inline = true)
     })
     List<GameEvent> events;
 
